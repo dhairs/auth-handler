@@ -1,15 +1,19 @@
-const app = require("express")();
+import express from "express";
+import authHandler from "../routes/auth";
+import firebaseApp from "../bin/firebase";
+
+var app = express();
 
 app.get("/api", (req, res) => {
-  const path = `/api/item/`;
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+  res.json({
+    message: "This API is not for direct use, please use the client.",
+  });
 });
 
-app.get("/api/item/:slug", (req, res) => {
-  const { slug } = req.params;
-  res.end(`Item: ${slug}`);
+app.get("/api/test", (req, res) => {
+  res.json({ Message: `${firebaseApp.name}` });
 });
 
-module.exports = app;
+app.get("/api/auth", authHandler);
+
+export default app;

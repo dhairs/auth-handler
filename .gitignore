@@ -1,1 +1,8 @@
-node_modules
+.vercel/
+.vscode/
+.env
+
+node_modules/
+
+api.es5/
+api.old/
